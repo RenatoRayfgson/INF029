@@ -16,15 +16,15 @@ int main(){
     //pridntf("q1\n");
     testQ1(); // 10 testes
     //pridntf("q2\n");
-    testQ2(); // 35 testes
+    //testQ2(); // 35 testes
     //prindtf("q3\n");
-    testQ3(); // 13 testes
+    //testQ3(); // 13 testes
     //prdintf("q4\n");
-    testQ4(); // 22 testes
+    //testQ4(); // 22 testes
     //prdintf("q5\n");
-    testQ5(); // 10 testes
+    //testQ5(); // 10 testes
     //prdintf("q6\n");
-    testQ6(); // 10 testes 
+    //testQ6(); // 10 testes 
     
     
 }
@@ -54,7 +54,7 @@ void testQ1(){
 
 }
 
-/*void testQ2(){
+void testQ2(){
     char datainicial[11], datafinal[11];
     int qtdDias, qtdMeses, qtdAnos;
     DiasMesesAnos dma;
@@ -184,7 +184,7 @@ void testQ1(){
     printf("%d\n",dma.qtdMeses == 1);
     printf("%d\n",dma.qtdAnos == 0);
 
-}*/
+}
 
 void testQ3(){
     char str[250];
@@ -261,7 +261,6 @@ void testQ4(){
     printf("%d\n",posicoes[7]==27);
 
 }
-
 
 void testQ5(){
     printf("%d\n",q5(345) == 543);
