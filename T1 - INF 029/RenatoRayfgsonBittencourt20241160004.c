@@ -28,56 +28,6 @@
 DataQuebrada quebraData(char data[]);
 
 /*
-## função utilizada para testes  ##
-
- somar = somar dois valores
-@objetivo
-    Somar dois valores x e y e retonar o resultado da soma
-@entrada
-    dois inteiros x e y
-@saida
-    resultado da soma (x + y)
- */
-int somar(int x, int y)
-{
-    int soma;
-    soma = x + y;
-    return soma;
-}
-
-/*
-## função utilizada para testes  ##
-
- fatorial = fatorial de um número
-@objetivo
-    calcular o fatorial de um número
-@entrada
-    um inteiro x
-@saida
-    fatorial de x -> x!
- */
-int fatorial(int x)
-{ //função utilizada para testes
-  int i, fat = 1;
-    
-  for (i = x; i > 1; i--)
-    fat = fat * i;
-    
-  return fat;
-}
-
-int teste(int a)
-{
-    int val;
-    if (a == 2)
-        val = 3;
-    else
-        val = 4;
-
-    return val;
-}
-
-/*
  Q1 = validar data
 @objetivo
     Validar uma data
@@ -139,8 +89,7 @@ int q1(char data[]){
     Caso o cálculo esteja correto, os atributos qtdDias, qtdMeses e qtdAnos devem ser preenchidos com os valores correspondentes.
  */
 DiasMesesAnos q2(char datainicial[], char datafinal[]){
-
-    //calcule os dados e armazene nas três variáveis a seguir
+    
     DiasMesesAnos dma;
 
     if (q1(datainicial) == 0){
@@ -150,17 +99,29 @@ DiasMesesAnos q2(char datainicial[], char datafinal[]){
       dma.retorno = 3;
       return dma;
     }else{
-      //verifique se a data final não é menor que a data inicial
-      
-      //calcule a distancia entre as datas
-
-
-      //se tudo der certo
+      DataQuebrada dataInicial = quebraData(datainicial);
+      DataQuebrada dataFinal = quebraData(datafinal);
+      if(dataInicial.iAno > dataFinal.iAno || (dataInicial.iAno == dataFinal.iAno && dataInicial.iMes > dataFinal.iMes) || (dataInicial.iAno == dataFinal.iAno && dataInicial.iMes == dataFinal.iMes && dataInicial.iDia > dataFinal.iDia)){
+        dma.retorno = 4;
+        return dma;
+      }  
+      int dias = dataFinal.iDia - dataInicial.iDia;
+      int meses = dataFinal.iMes - dataInicial.iMes;
+      int anos = dataFinal.iAno - dataInicial.iAno;
+      if(dias < 0){
+        meses--;
+        dias = dias + quantidadeDeDias((dataFinal.iMes == 1 ? 12 : dataFinal.iMes - 1), dataFinal.iAno); //Eu não costumo usar operador ternário, mas como não posso usar condicional nesse contexto, teve que ser ele, perdão!
+      }
+      if(meses < 0){
+        anos--;
+        meses = meses + 12;
+      } 
+      dma.qtdAnos = anos;
+      dma.qtdMeses = meses;
+      dma.qtdDias = dias;      
       dma.retorno = 1;
-      return dma;
-      
-    }
-    
+      return dma;      
+    }    
 }
 
 /*

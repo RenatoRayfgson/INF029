@@ -14,9 +14,9 @@ void testQ6();
 
 int main(){
     //pridntf("q1\n");
-    testQ1(); // 10 testes
+    //testQ1(); // 10 testes
     //pridntf("q2\n");
-    //testQ2(); // 35 testes
+    testQ2(); // 35 testes
     //prindtf("q3\n");
     //testQ3(); // 13 testes
     //prdintf("q4\n");
