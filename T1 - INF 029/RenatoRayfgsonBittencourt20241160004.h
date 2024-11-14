@@ -51,5 +51,7 @@ int q5(int num);
 int q6(int numerobase, int numerobusca);
 DataQuebrada quebraData(char data[]);
 //int quebraData(char *data);
+int anoBissexto(int ano);
+int quantidadeDeDias(int mes, int ano);
 
 #endif  // TRABALHO1_PRIMEIROULTIMONOMEMATRICULA_H
