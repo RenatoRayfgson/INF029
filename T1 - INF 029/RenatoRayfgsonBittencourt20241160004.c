@@ -22,6 +22,7 @@
 // #################################################
 
 #include <stdio.h>
+#include <string.h>
 #include "RenatoRayfgsonBittencourt20241160004.h" // Substitua pelo seu arquivo de header renomeado
 #include <stdlib.h>
 
@@ -173,10 +174,21 @@ int q4(char *strTexto, char *strBusca, int posicoes[30])
     Número invertido
  */
 
-int q5(int num)
-{
-
-    return num;
+int q5(int num){
+  int casas = tamanhoNumero(num);
+  int digitos[127];
+  int base = 1;
+  int numInvertido=0;
+  for(int i=0; i < casas; i++){
+    digitos[i] = (num/base)%10;
+    base *= 10;
+  }
+  for(int i = 0; i < casas; i++){
+    numInvertido = numInvertido + digitos[i]*base;
+    base = base/10;
+  }
+  numInvertido = numInvertido/10;
+  return numInvertido;
 }
 
 /*
@@ -189,8 +201,7 @@ int q5(int num)
     Quantidade de vezes que número de busca ocorre em número base
  */
 
-int q6(int numerobase, int numerobusca)
-{
+int q6(int numerobase, int numerobusca){
     int qtdOcorrencias;
     return qtdOcorrencias;
 }

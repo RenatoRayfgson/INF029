@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 #include <stdlib.h>
 #include "RenatoRayfgsonBittencourt20241160004.h"
 //Verifica se o bendito ano é bissexto ou não
@@ -13,3 +14,9 @@ int quantidadeDeDias(int mes, int ano){
     default: return 31;
   }
 }
+int tamanhoNumero(int numero){  
+  char numeroString[127];
+  sprintf(numeroString, "%d", numero);
+  return strlen(numeroString);
+}
+//aa

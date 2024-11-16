@@ -53,5 +53,6 @@ DataQuebrada quebraData(char data[]);
 //int quebraData(char *data);
 int anoBissexto(int ano);
 int quantidadeDeDias(int mes, int ano);
+int tamanhoNumero(int numero);
 
 #endif  // TRABALHO1_PRIMEIROULTIMONOMEMATRICULA_H
