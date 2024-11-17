@@ -22,9 +22,9 @@ int main(){
     //prdintf("q4\n");
     //testQ4(); // 22 testes
     //prdintf("q5\n");
-    testQ5(); // 10 testes
+    //testQ5(); // 10 testes
     //prdintf("q6\n");
-    //testQ6(); // 10 testes 
+    testQ6(); // 10 testes 
     
     
 }
@@ -286,7 +286,7 @@ void testQ6(){
     printf("%d\n",q6(1234, 13) == 0);
     printf("%d\n",q6(544444, 4) == 5);
     printf("%d\n",q6(1234562354, 32) == 0);
-
 }
+
       
         

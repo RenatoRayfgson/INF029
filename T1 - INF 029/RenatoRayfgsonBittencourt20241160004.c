@@ -202,7 +202,27 @@ int q5(int num){
  */
 
 int q6(int numerobase, int numerobusca){
-    int qtdOcorrencias;
+    int qtdOcorrencias=0;
+    int j;
+    int tamNumBase = tamanhoNumero(numerobase);
+    int tamNumBusca = tamanhoNumero(numerobusca);
+    char numBaseString[127];
+    sprintf(numBaseString, "%d", numerobase); // 3567
+    char numBuscaString[127];
+    sprintf(numBuscaString, "%d", numerobusca); //56
+    for(int i = 0; i <= tamNumBase - tamNumBusca; i++){
+      if(numBuscaString[0]==numBaseString[i]){
+        for(j = 0; j < tamNumBusca; j++){
+          if(numBuscaString[j] != numBaseString[j+i]){
+            break;
+          }
+        }
+        if(j == tamNumBusca){
+          qtdOcorrencias++;
+          i = i + tamNumBusca - 1;          
+        }
+      }
+    }
     return qtdOcorrencias;
 }
 
