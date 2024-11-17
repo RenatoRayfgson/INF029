@@ -135,11 +135,33 @@ DiasMesesAnos q2(char datainicial[], char datafinal[]){
  @saida
     Um número n >= 0.
  */
-int q3(char *texto, char c, int isCaseSensitive)
-{
-    int qtdOcorrencias = -1;
-
-    return qtdOcorrencias;
+int q3(char *texto, char c, int isCaseSensitive){
+  int qtdOcorrencias = 0;
+  int i = 0;
+  char fraseSemAcento[127];
+  if(isCaseSensitive){
+    removerAcentos(texto, fraseSemAcento);
+    while(texto[i] != '\0'){
+      if(c == texto[i]){
+        qtdOcorrencias++;
+      }
+      i++;
+    }
+  }
+  if(!isCaseSensitive){
+    removerAcentos(texto, fraseSemAcento);
+    tudoMinusculo(fraseSemAcento);
+    if(c>='A' && c<= 'Z'){
+      c=c+32;
+    }
+    while(fraseSemAcento[i] != '\0'){
+      if(fraseSemAcento[i] == c){
+        qtdOcorrencias++;
+      }
+      i++;
+    }    
+  }
+  return qtdOcorrencias;
 }
 
 /*
@@ -225,10 +247,6 @@ int q6(int numerobase, int numerobusca){
     }
     return qtdOcorrencias;
 }
-
-
-
-
 DataQuebrada quebraData(char data[]){
   DataQuebrada dq;
   char sDia[3];

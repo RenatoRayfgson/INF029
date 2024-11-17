@@ -54,5 +54,7 @@ DataQuebrada quebraData(char data[]);
 int anoBissexto(int ano);
 int quantidadeDeDias(int mes, int ano);
 int tamanhoNumero(int numero);
+void removerAcentos(const char *texto, char *fraseSemAcento);
+void tudoMinusculo(char *fraseSemAcento);
 
 #endif  // TRABALHO1_PRIMEIROULTIMONOMEMATRICULA_H
