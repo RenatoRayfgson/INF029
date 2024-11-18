@@ -44,6 +44,7 @@ DataQuebrada quebraData(char data[]);
 int q1(char data[]){
   int datavalida = 1;
   DataQuebrada novaData = quebraData(data);
+  if(novaData.valido == 0){datavalida = 0;}  
   int dia = novaData.iDia, mes = novaData.iMes, ano = novaData.iAno;
   if(mes > 12 || mes < 1){datavalida = 0;}
   if(ano < 0){datavalida = 0;}
