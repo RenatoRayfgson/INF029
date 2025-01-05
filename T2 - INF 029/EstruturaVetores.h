@@ -14,6 +14,12 @@ typedef struct reg {
     struct reg *prox;
 } No;
 
+typedef struct{
+    int qtd;
+    int tamanho;
+    int *numero;
+}Auxiliar; 
+
 int criarEstruturaAuxiliar(int posicao, int tamanho);
 int inserirNumeroEmEstrutura(int posicao, int valor);
 int excluirNumeroDoFinaldaEstrutura(int posicao);
@@ -32,4 +38,5 @@ void inicializar();
 void finalizar();
 void dobrar(int *x);
 
+bool validarPosicao(int posicao); //Apenas valida a posição, só pra não ficar repetindo isso no código.
 #endif  // TRABALHO2_ESTRUTURAVETORES_H
