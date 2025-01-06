@@ -18,15 +18,24 @@ void testeListaEncadeada();
 
 int main()
 {
-    inicializar();
-    testeInserirSemNada();
+    inicializar();   
+    printf("TESTE 1\n"); 
+    testeInserirSemNada(); 
+    printf("TESTE 2\n");   
     testeCriarEstrutura();
-    testeInserirComEstrutura();
+    printf("TESTE 3\n");    
+    testeInserirComEstrutura();    
+    printf("TESTE 4\n");
     testeExcluir();
-    testeExcluirNumeroEspecifico();
-    testeListar();
-    testeRetornarTodosNumeros();
-    testeMudarTamanhoEstrutura();
+    printf("TESTE 5\n");
+    testeExcluirNumeroEspecifico();  
+    printf("TESTE 6\n");      
+    testeListar(); 
+    printf("TESTE 7\n");
+    testeRetornarTodosNumeros(); 
+    printf("TESTE 8\n"); 
+    testeMudarTamanhoEstrutura();   
+    printf("TESTE 9\n"); 
     testeListaEncadeada();
     finalizar();
 }
@@ -97,8 +106,8 @@ void testeExcluirNumeroEspecifico()
     printf("%d\n", inserirNumeroEmEstrutura(9, 7) == SUCESSO);
     printf("%d\n", inserirNumeroEmEstrutura(9, 4) == SUCESSO);
     printf("%d\n", excluirNumeroEspecificoDeEstrutura(9, 12) == NUMERO_INEXISTENTE);
-    printf("%d\n", excluirNumeroEspecificoDeEstrutura(9, 7) == SUCESSO);
-    printf("%d\n", excluirNumeroEspecificoDeEstrutura(9, 4) == SUCESSO);
+    printf("%d\n", excluirNumeroEspecificoDeEstrutura(9, 7) == SUCESSO); //
+    printf("%d\n", excluirNumeroEspecificoDeEstrutura(9, 4) == SUCESSO); //
     printf("%d\n", excluirNumeroEspecificoDeEstrutura(1, 2) == SEM_ESTRUTURA_AUXILIAR);
 }
 /*
@@ -168,10 +177,9 @@ void testeRetornarTodosNumeros()
 2 [3,8,0]
 5 [1,34,12,6,27,-6, , , , ]
 */
-    int vet[9];
+    int vet[9];    
 
-    printf("%d\n", getDadosDeTodasEstruturasAuxiliares(vet) == SUCESSO);
-
+    printf("%d\n", getDadosDeTodasEstruturasAuxiliares(vet) == SUCESSO);    
     printf("%d\n", vet[0] == 3);
     printf("%d\n", vet[1] == 8);
     printf("%d\n", vet[2] == 0);
@@ -196,7 +204,7 @@ void testeRetornarTodosNumeros()
     printf("%d\n", vet2[7] == 27);
     printf("%d\n", vet2[8] == 34);
 
-    printf("%d\n", getDadosDeTodasEstruturasAuxiliares(vet) == SUCESSO);
+    printf("%d\n", getDadosDeTodasEstruturasAuxiliares(vet) == SUCESSO);    
 
     printf("%d\n", vet[0] == 3);
     printf("%d\n", vet[1] == 8);

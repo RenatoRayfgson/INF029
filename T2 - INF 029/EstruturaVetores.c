@@ -44,7 +44,6 @@ int inserirNumeroEmEstrutura(int posicao, int valor){
     if(vetor[posicao].qtd == vetor[posicao].tamanho){
         return SEM_ESPACO;
     }
-
     vetor[posicao].numero[vetor[posicao].qtd] = valor;
     vetor[posicao].qtd++;
     return SUCESSO;
@@ -79,7 +78,7 @@ int excluirNumeroEspecificoDeEstrutura(int posicao, int valor){
         return ESTRUTURA_AUXILIAR_VAZIA;
     }
     for(int i = 0; i<vetor[posicao].qtd; i++){
-        if(valor == vetor[posicao].numero){
+        if(valor == vetor[posicao].numero[i]){
             busca = i;
             break;
         }
@@ -95,6 +94,7 @@ int excluirNumeroEspecificoDeEstrutura(int posicao, int valor){
 }
 
 int getDadosEstruturaAuxiliar(int posicao, int vetorAux[]){
+    int qtd = 0;
     if(!validarPosicao(posicao)){
         return POSICAO_INVALIDA;
     }
@@ -102,13 +102,18 @@ int getDadosEstruturaAuxiliar(int posicao, int vetorAux[]){
     if(vetor[posicao].numero == NULL){
         return SEM_ESTRUTURA_AUXILIAR;
     }
-    for(int i = 0; i < vetor[posicao].qtd; i++){
+    for(int i = 0; i < vetor[posicao].qtd; i++){                  
         vetorAux[i] = vetor[posicao].numero[i];
+        qtd++;        
+    }
+    if(qtd < 1){
+        return TODAS_ESTRUTURAS_AUXILIARES_VAZIAS;
     }
     return SUCESSO;   
 }
 
 int getDadosOrdenadosEstruturaAuxiliar(int posicao, int vetorAux[]){
+    int qtd = 0;
     if(!validarPosicao(posicao)){
         return POSICAO_INVALIDA;
     }
@@ -116,46 +121,54 @@ int getDadosOrdenadosEstruturaAuxiliar(int posicao, int vetorAux[]){
     if(vetor[posicao].numero == NULL){
         return SEM_ESTRUTURA_AUXILIAR;
     }
-    for(int i = 0; i < vetor[posicao].qtd; i++){
+    for(int i = 0; i < vetor[posicao].qtd; i++){                  
         vetorAux[i] = vetor[posicao].numero[i];
+        qtd++;        
     }
-    bubbleSort(vetorAux, vetor[posicao].qtd);
+    if(qtd < 1){
+        return TODAS_ESTRUTURAS_AUXILIARES_VAZIAS;
+    }
+    bubbleSort(vetorAux, qtd);
     return SUCESSO; 
 }
 
 int getDadosDeTodasEstruturasAuxiliares(int vetorAux[]){
     int sentinela = 0;
+    int qtdEstruturasVazias = 0;
     for(int i = 0; i < 10; i++){
-        if(vetor[i].numero != NULL){
-            for(int j = 0; j<vetor[i].qtd; j++){
-                vetorAux = vetor[i].numero[j];
-                sentinela++;
-            }
+        if(vetor[i].qtd != 0){
+            qtdEstruturasVazias++;            
         }
-    }
-    if(sentinela < 1){
+        int j;
+        for(j = 0; j < vetor[i].qtd; j++){
+            vetorAux[j+sentinela] = vetor[i].numero[j];
+        }
+        sentinela += j;
+    }  
+    if(qtdEstruturasVazias == 0){
         return TODAS_ESTRUTURAS_AUXILIARES_VAZIAS;
-    }else{
-        return SUCESSO;
     }
+    return SUCESSO;     
 }
 
 int getDadosOrdenadosDeTodasEstruturasAuxiliares(int vetorAux[]){
     int sentinela = 0;
+    int qtdEstruturasVazias = 0;
     for(int i = 0; i < 10; i++){
-        if(vetor[i].numero != NULL){
-            for(int j = 0; j<vetor[i].qtd; j++){
-                vetorAux = vetor[i].numero[j];
-                sentinela++;
-            }
+        if(vetor[i].qtd != 0){
+            qtdEstruturasVazias++;            
         }
-    }
-    if(sentinela < 1){
+        int j;
+        for(j = 0; j < vetor[i].qtd; j++){
+            vetorAux[j+sentinela] = vetor[i].numero[j];
+        }
+        sentinela += j;
+    }  
+    if(qtdEstruturasVazias == 0){
         return TODAS_ESTRUTURAS_AUXILIARES_VAZIAS;
-    }else{
-        bubbleSort(vetorAux, sentinela);
-        return SUCESSO;
     }
+    bubbleSort(vetorAux, sentinela);
+    return SUCESSO;     
 }
 
 int modificarTamanhoEstruturaAuxiliar(int posicao, int novoTamanho){    
@@ -166,17 +179,18 @@ int modificarTamanhoEstruturaAuxiliar(int posicao, int novoTamanho){
     if(vetor[posicao].numero == NULL){
         return SEM_ESTRUTURA_AUXILIAR;
     }
-    novoTamanho += vetor[posicao].tamanho;
-    if(novoTamanho < 1){
-        return TAMANHO_INVALIDO;
+    int tamanhoFinal = novoTamanho + vetor[posicao].tamanho;
+    if(tamanhoFinal < 1){
+        return NOVO_TAMANHO_INVALIDO;
     }
-    vetor[posicao].tamanho = novoTamanho;
-    vetor[posicao].numero = realloc(vetor[posicao].numero, sizeof(int) *vetor[posicao].tamanho);
-    while(vetor[posicao].qtd > vetor[posicao].tamanho){
-        vetor[posicao].qtd--;
-    }
-    if(vetor[posicao].numero == NULL){
+    int *novoNumero = realloc(vetor[posicao].numero, sizeof(int) * tamanhoFinal);
+    if(novoNumero == NULL){
         return SEM_ESPACO_DE_MEMORIA;
+    }
+    vetor[posicao].numero = novoNumero;
+    vetor[posicao].tamanho = tamanhoFinal;
+    if(vetor[posicao].qtd > vetor[posicao].tamanho){
+        vetor[posicao].qtd = vetor[posicao].tamanho;
     }
     return SUCESSO;
 }
@@ -234,7 +248,7 @@ void destruirListaEncadeadaComCabecote(No **inicio){
     while(ficha != NULL){
         seguinte = ficha -> prox;
         free(ficha);
-        seguinte = seguinte;
+        ficha = seguinte;
     }
     *inicio = NULL;
 }
