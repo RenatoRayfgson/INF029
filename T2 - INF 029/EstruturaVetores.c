@@ -57,13 +57,13 @@ int inserirNumeroEmEstrutura(int posicao, int valor){
     }
     posicao--;
 
+    if(vetor[posicao].numero == NULL){
+        return SEM_ESTRUTURA_AUXILIAR;
+    }
     if(vetor[posicao].qtd == vetor[posicao].tamanho){
         return SEM_ESPACO;
     }
 
-    if(vetor[posicao].numero == NULL){
-        return SEM_ESTRUTURA_AUXILIAR;
-    }
     vetor[posicao].numero[vetor[posicao].qtd] = valor;
     vetor[posicao].qtd++;
     return SUCESSO;
@@ -81,17 +81,19 @@ Rertono (int)
     POSICAO_INVALIDA - Posição inválida para estrutura auxiliar
 */
 int excluirNumeroDoFinaldaEstrutura(int posicao){
-    if(!validarPosicao(posicao)){
+    if(!validarPosicao(posicao)){        
         return POSICAO_INVALIDA;
     }    
     posicao--;    
-    if(vetor[posicao].numero == NULL){
+    if(vetor[posicao].numero == NULL){        
         return SEM_ESTRUTURA_AUXILIAR;
     }
     if(vetor[posicao].qtd == 0){
         return ESTRUTURA_AUXILIAR_VAZIA;
-    }    
+    }
+    vetor[posicao].numero[vetor[posicao].qtd - 1] = 0;    
     vetor[posicao].qtd--;
+    return SUCESSO;
 }
 
 /*
@@ -292,15 +294,40 @@ Retorno (No*)
     No*, ponteiro para o início da lista com cabeçote
 */
 No *montarListaEncadeadaComCabecote(){
+    No *comeco = (No*)malloc(sizeof(No));
+    No *ficha = comeco;
+    if(comeco == NULL){
+        return NULL;
+    }
+    comeco -> conteudo = 0;
+    comeco -> prox = NULL;
+    for(int i = 0; i < 10; i++){
+        if(vetor[i].numero != NULL){
+            for(int j = 0; j < vetor[i].qtd; j++){
+                No *encad = (No*)malloc(sizeof(No));
+                encad->conteudo = vetor[i].numero[j];
+                encad->prox = NULL;
+                ficha->prox = encad;
+                ficha = encad;
 
-    return NULL;
+            }
+        }
+    }
+    return comeco;
 }
 
 /*
 Objetivo: retorna os números da lista enceada com cabeçote armazenando em vetorAux.
 Retorno void
 */
-void getDadosListaEncadeadaComCabecote(No *inicio, int vetorAux[]){
+void getDadosListaEncadeadaComCabecote(No *inicio, int vetorAux[]){    
+    int i = 0;
+    No *ficha = inicio->prox;
+    while(ficha != NULL){
+        vetorAux[i] = ficha -> conteudo;
+        ficha = ficha -> prox;
+        i++;
+    }
 }
 
 /*
@@ -311,6 +338,14 @@ Retorno
     void.
 */
 void destruirListaEncadeadaComCabecote(No **inicio){
+    No *ficha = *inicio;
+    No *seguinte = NULL;
+    while(ficha != NULL){
+        seguinte = ficha -> prox;
+        free(ficha);
+        seguinte = seguinte;
+    }
+    *inicio = NULL;
 }
 
 /*
