@@ -15,7 +15,7 @@ typedef struct reg {
 } No;
 
 typedef struct{
-    int qtd;
+    int qtd; //Quantidade de elementos presentes
     int tamanho;
     int *numero;
 }Auxiliar; 
@@ -39,4 +39,5 @@ void finalizar();
 void dobrar(int *x);
 
 bool validarPosicao(int posicao); //Apenas valida a posição, só pra não ficar repetindo isso no código.
+void bubbleSort(int vetorAux[], int k); //Usei bubble sort por que como se trata de tamanhos pequenos, eficiência não chega a ser problema
 #endif  // TRABALHO2_ESTRUTURAVETORES_H
