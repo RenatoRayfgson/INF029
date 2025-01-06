@@ -20,10 +20,10 @@ int criarEstruturaAuxiliar(int posicao, int tamanho){//Ao invés de usar a vari�
     if(!validarPosicao(posicao)){
         return POSICAO_INVALIDA;
     }
+    posicao--;
     if(tamanho < 1){
         return TAMANHO_INVALIDO;
     }
-    posicao--;
     if(vetor[posicao].numero != NULL){
         return JA_TEM_ESTRUTURA_AUXILIAR;
     }
@@ -319,6 +319,13 @@ Objetivo: inicializa o programa. deve ser chamado ao inicio do programa
 */
 
 void inicializar(){
+    vetor = (Auxiliar*)malloc(sizeof(Auxiliar)*10);
+    for(int i = 0; i < 10; i++){
+        vetor[i].numero = NULL;
+        vetor[i].qtd = 0;
+        vetor[i].tamanho = 0;
+
+    }
 }
 
 /*
@@ -328,4 +335,10 @@ para poder liberar todos os espaços de memória das estruturas auxiliares.
 */
 
 void finalizar(){
+    for(int i = 0; i < 10; i++){
+        if(vetor[i].numero == NULL){
+            free(vetor[i].numero);
+        }
+    }
+    free(vetor);
 }
