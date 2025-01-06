@@ -207,7 +207,7 @@ int getDadosDeTodasEstruturasAuxiliares(int vetorAux[]){
     int sentinela = 0;
     for(int i = 0; i < 10; i++){
         if(vetor[i].numero != NULL){
-            for(int j = 0; j<vetor[i].tamanho; j++){
+            for(int j = 0; j<vetor[i].qtd; j++){
                 vetorAux = vetor[i].numero[j];
                 sentinela++;
             }
