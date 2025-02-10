@@ -253,6 +253,29 @@ void destruirListaEncadeadaComCabecote(No **inicio){
     *inicio = NULL;
 }
 
+int salvarArquivo(const char* arquivo){
+    FILE *fp = fopen(arquivo, "w");
+    if(fp == NULL){
+        perror("fopen");
+        return 0;
+    }
+    for(int i = 0; i < 10; i++){
+        if(i>0){
+            fprintf(fp, "\n");
+        }
+        fprintf(fp, "%d %d %d", i+1, vetor[i].qtd, vetor[i].tamanho);
+        for(int j = 0; j < vetor[i].qtd; j++){
+            fprintf(fp, " %d", vetor[i].numero[j]);
+        }
+    }
+    fclose(fp);
+    return 1;
+}
+
+int recuperarArquivo(){
+
+}
+
 void inicializar(){
     vetor = (Auxiliar*)malloc(sizeof(Auxiliar)*10);
     for(int i = 0; i < 10; i++){
@@ -271,3 +294,5 @@ void finalizar(){
     }
     free(vetor);
 }
+
+
