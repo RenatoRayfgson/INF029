@@ -283,18 +283,7 @@ int recuperarArquivo(const char* arquivo){
     }
 
     while(fscanf(fp, "%d %d %d", &aux, &qtd, &tamanho) == 3){
-        if(aux < 1 || aux > 10){
-            printf("Há índices inválidos no arquivo\n");
-            return 0;
-        }
-
-        if(tamanho < 0){
-            printf("Há tamanhos inválidos no arquivo\n");
-            return 0;
-        }
-
-        if(qtd < 0 || qtd>tamanho){
-            printf("Há um terro na quantidade de elementos\n");
+        if((aux-1 < 1 || aux > 10) || (tamanho < 0) || (qtd < 0 || qtd>tamanho)){            
             return 0;
         }
 
@@ -307,7 +296,7 @@ int recuperarArquivo(const char* arquivo){
             }
 
             for(int i = 0; i < qtd; i++){
-                if(scanf(fp, "%d", &valor) != 1){
+                if(fscanf(fp, "%d", &valor) != 1){
                     printf("Valor não possível de ler\n");
                     fclose(fp);
                     return 0;
@@ -335,7 +324,7 @@ void inicializar(){
     if(fp == NULL){
         fp = fopen(arquivo, "w");
         if(fp == NULL){
-            return EXIT_FAILURE;
+            return;
         }
     }else{
         printf("Um arquivo foi encontrado e será carregado\n");
@@ -361,7 +350,7 @@ void finalizar(){
         printf("Houve um erro ao salvar o arquivo\n");
     }
     for(int i = 0; i < 10; i++){
-        if(vetor[i].numero == NULL){
+        if(vetor[i].numero != NULL){
             free(vetor[i].numero);
             vetor[i].numero = NULL;
         }
