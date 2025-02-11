@@ -272,27 +272,102 @@ int salvarArquivo(const char* arquivo){
     return 1;
 }
 
-int recuperarArquivo(){
+int recuperarArquivo(const char* arquivo){
+    int aux, qtd;
+    int tamanho, valor, retorno;
+    FILE *fp = fopen(arquivo, "r");
 
+    if(fp == NULL){
+        printf("Não há arquivo ou ele não pôder ser lido!\n");
+        return 0;
+    }
+
+    while(fscanf(fp, "%d %d %d", &aux, &qtd, &tamanho) == 3){
+        if(aux < 1 || aux > 10){
+            printf("Há índices inválidos no arquivo\n");
+            return 0;
+        }
+
+        if(tamanho < 0){
+            printf("Há tamanhos inválidos no arquivo\n");
+            return 0;
+        }
+
+        if(qtd < 0 || qtd>tamanho){
+            printf("Há um terro na quantidade de elementos\n");
+            return 0;
+        }
+
+        if(tamanho > 0){
+            retorno = criarEstruturaAuxiliar(aux, tamanho);
+            if(retorno != SUCESSO){
+                printf("Estrutura auxiliar não criada\n");
+                fclose(fp);
+                return 0;
+            }
+
+            for(int i = 0; i < qtd; i++){
+                if(scanf(fp, "%d", &valor) != 1){
+                    printf("Valor não possível de ler\n");
+                    fclose(fp);
+                    return 0;
+                }
+                if(i < tamanho){
+                    retorno = inserirNumeroEmEstrutura(aux, valor);
+                    if(retorno != SUCESSO){
+                        printf("Não é possível adicionar o valor na estrutura\n");
+                        fclose(fp);
+                        return 0;
+                    }
+                }
+            }
+        }
+    }
+    fclose(fp);
+    return 1;
 }
-
 void inicializar(){
+    const char *arquivo = "dadosSalvos.txt";
+    FILE *fp;
+
+    fp = fopen(arquivo, "r");
+
+    if(fp == NULL){
+        fp = fopen(arquivo, "w");
+        if(fp == NULL){
+            return EXIT_FAILURE;
+        }
+    }else{
+        printf("Um arquivo foi encontrado e será carregado\n");
+    }
+    fclose(fp);
+
     vetor = (Auxiliar*)malloc(sizeof(Auxiliar)*10);
+
     for(int i = 0; i < 10; i++){
         vetor[i].numero = NULL;
         vetor[i].qtd = 0;
         vetor[i].tamanho = 0;
 
     }
+    recuperarArquivo(arquivo);
 }
 
 void finalizar(){
+    const char *arquivo = "dadosSalvos.txt";
+    int retorno = salvarArquivo(arquivo);
+
+    if(retorno != 1){
+        printf("Houve um erro ao salvar o arquivo\n");
+    }
     for(int i = 0; i < 10; i++){
         if(vetor[i].numero == NULL){
             free(vetor[i].numero);
+            vetor[i].numero = NULL;
         }
     }
     free(vetor);
+    vetor = NULL;
 }
 
 
