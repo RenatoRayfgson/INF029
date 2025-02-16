@@ -283,7 +283,7 @@ int recuperarArquivo(const char* arquivo){
     }
 
     while(fscanf(fp, "%d %d %d", &aux, &qtd, &tamanho) == 3){
-        if((aux-1 < 1 || aux > 10) || (tamanho < 0) || (qtd < 0 || qtd>tamanho)){            
+        if((aux < 1 || aux > 10) || (tamanho < 0) || (qtd < 0 || qtd>tamanho)){            
             return 0;
         }
 
